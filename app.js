@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
+let teamMembers = [];
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -33,3 +33,56 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+function createManager (){
+    console.log("Welcome, Manager!");
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your name?',
+            name: 'managerName'
+        },
+        {
+            type: 'input',
+            message: 'What is your ID?',
+            name: 'managerId'
+        },
+        {
+            type: 'input',
+            message: 'What is your email?',
+            name: 'managerEmail'
+        },
+        {
+            type: 'input',
+            message: 'What is your office number?',
+            name: 'officeNumber'
+        }]
+    )
+    .then(answers => {
+        let manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
+        teamMembers.push(manager);
+        createTeam()
+    })
+}
+function createTeam(){
+    inquirer.prompt({
+        type: 'list',
+        message: 'What kind of team member would you like to add?',
+        name: 'memberAdd',
+        choices: ["Engineer", "Intern", "None"]
+
+    })
+    .then(answers => {
+        switch(answers.memberAdd){
+            case "Engineer":
+                createEngineer();
+                // break us out of the loop
+                break;
+            case "Intern":
+                createIntern();
+                break;
+            default:
+                buildTeam()
+        }
+    })
+}
