@@ -34,7 +34,7 @@ let teamMembers = [];
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-function createManager (){
+function createManager(){
     console.log("Welcome, Manager!");
     inquirer.prompt([
         {
@@ -64,6 +64,68 @@ function createManager (){
         createTeam()
     })
 }
+function createEngineer(){
+    console.log("Please answer the following questions about Engineer team members.")
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is their name?',
+            name: 'engineerName'
+        },
+        {
+            type: 'input',
+            message: 'What is their ID number?',
+            name: 'engineerID'
+        },
+        {
+            type: 'input',
+            message: 'What is their email?',
+            name: 'engineerEmail'
+        },
+        {
+            type: 'input',
+            message: 'What is their Github username?',
+            name: 'github'
+        }
+    ])
+    .then(answers => {
+        let engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
+        teamMembers.push(engineer);
+        createTeam()
+    })
+}
+
+function createIntern(){
+    console.log("Please answer the following questions about Engineer team members.")
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is their name?',
+            name: 'internName'
+        },
+        {
+            type: 'input',
+            message: 'What is their ID number?',
+            name: 'internId'
+        },
+        {
+            type: 'input',
+            message: 'What is their email?',
+            name: 'internEmail'
+        },
+        {
+            type: 'input',
+            message: 'What is their Github username?',
+            name: 'school'
+        }
+    ])
+    .then(answers => {
+        let intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
+        teamMembers.push(intern);
+        createTeam()
+    })
+}
+
 function createTeam(){
     inquirer.prompt({
         type: 'list',
@@ -82,7 +144,7 @@ function createTeam(){
                 createIntern();
                 break;
             default:
-                buildTeam()
+                buildTeam();
         }
     })
 }
