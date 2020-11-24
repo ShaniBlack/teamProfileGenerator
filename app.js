@@ -12,6 +12,7 @@ const render = require("./lib/htmlRenderer");
 
 let teamMembers = [];
 
+
 function createManager(){
     console.log("Welcome, Manager!");
     inquirer.prompt([
@@ -109,7 +110,7 @@ function createTeam(){
         type: 'list',
         message: 'What kind of team member would you like to add?',
         name: 'memberAdd',
-        choices: ["Engineer", "Intern", "None"]
+        choices: ["Manager", "Engineer", "Intern", "None"]
 
     })
     .then(answers => {
@@ -129,14 +130,11 @@ function createTeam(){
                 break;
         }
     })
-};
-function buildTeam(OUTPUT_DIR, outputPath) {
-    return fs.writeFileSync(OUTPUT_DIR, outputPath)
 }
+function writeFile
 
-function init() {
-    inquirer.prompt()
-    .then(function(answer){
-        
-    })
-}
+
+
+
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html")
